@@ -1,7 +1,10 @@
-const express=require('express')
-const router=express.Router();
-router.get('/',(req,res)=>{
-    res.send("success")
-})
+// api.js
 
-module.exports=router;
+import express from "express";
+import {UserControllers} from "../controllers/Users/UsersControllers.js";
+
+const router = express.Router();
+
+router.post("/Registration", UserControllers.Registration);
+
+export default router;

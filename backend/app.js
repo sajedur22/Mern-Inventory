@@ -1,20 +1,23 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const rateLimit = require('express-rate-limit');
-const helmet = require('helmet');
-const hpp = require('hpp');
-const cors = require('cors');
-const router = require('./src/routes/api');
-const path = require('path');
-const app = express();
+import express from 'express';
+import mongoose from 'mongoose';
+import rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
+dotenv.config();
+import router from './src/routes/api.js'; // .js extension দিতে হবে
+import path from 'path';
+
+const app = express();
 
 // Security Middleware
 
 const CLIENT_URLS = [
     process.env.DEV_CLIENT_URL,
     process.env.PROD_CLIENT_URL,
-].filter(Boolean); 
+].filter(Boolean);
 
 const corsOptions = {
     origin: function (origin, callback) {
@@ -51,8 +54,8 @@ function sanitizeMongo(req, res, next) {
 app.use(sanitizeMongo);
 
 // JSON Body Parser
-app.use(express.json({limit:'50mb'}));
-app.use(express.urlencoded({limit:'50mb'}));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb' }));
 
 // Rate Limiter
 const limiter = rateLimit({
@@ -80,7 +83,4 @@ mongoose.connect(uri, options)
 // API Routing
 app.use("/api/v1", router);
 
-
-
-// Export
-module.exports = app;
+export default app;
