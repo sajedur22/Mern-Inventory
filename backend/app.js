@@ -5,6 +5,9 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+
+
 
 dotenv.config();
 import router from './src/routes/api.js'; // .js extension দিতে হবে
@@ -67,6 +70,7 @@ const limiter = rateLimit({
     }
 });
 app.use(limiter);
+app.use(cookieParser());
 
 // MongoDB Connection
 const uri = process.env.MONGO_URI;

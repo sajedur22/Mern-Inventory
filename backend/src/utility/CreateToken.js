@@ -1,8 +1,12 @@
-const jwt=require('jsonwebtoken')
+import jwt from "jsonwebtoken";
 
-const CreateToken=async(data)=>{
-  let Payload={exp:Math.floor(Date.now()/1000+(24*60*60)),data:data};
-  return jwt.sign(Payload,"SecretKey123456789");
-}
+const CreateToken = (data) => {
+  const payload = {
+    exp: Math.floor(Date.now() / 1000) + (24 * 60 * 60), // 1 day expiry
+    data: data
+  };
 
-module.exports=CreateToken;
+  return jwt.sign(payload, process.env.JWT_SECRET);
+};
+
+export default CreateToken;
