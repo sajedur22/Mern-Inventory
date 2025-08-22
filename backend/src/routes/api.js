@@ -20,3 +20,6 @@ export default router;
 // Brands
 router.post("/CreateBrand",AuthVerifyMiddleware,BranController.CreateBrand);
 router.post("/UpdateBrand/:id",AuthVerifyMiddleware,BranController.UpdateBrand);
+router.get("/BrandList/:pageNo/:perPage/:searchKeyword",AuthVerifyMiddleware,BranController.BrandList);
+router.get("/BrandDropDown",AuthVerifyMiddleware,BranController.BrandDropDown);
+router.get("/DeleteBrand/:id",AuthVerifyMiddleware,BranController.DeleteBrand);
